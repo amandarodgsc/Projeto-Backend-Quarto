@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 const { mongodb_url } = require('../.env');
 
-mongoose.connect(mongodb_url, {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useCreateIndex: true
+mongoose.connect(dbURI, {
+  tlsAllowInvalidCertificates: true // Temporário até resolver problemas de SSL
 }).then(() => {
   console.log('Conectado ao MongoDB');
-}).catch(error => {
-  const msg = 'Erro ao conectar ao MongoDB';
-  console.log(msg);
+}).catch((err) => {
+  console.error('Erro ao conectar ao MongoDB', err);
 });
